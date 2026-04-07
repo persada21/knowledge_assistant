@@ -1,0 +1,97 @@
+plugins:
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-performance
+
+# Only check the files that matter — app code, specs, and config
+AllCops:
+  NewCops: enable
+  SuggestExtensions: false
+  TargetRubyVersion: 3.2
+  Include:
+    - "app/models/**/*.rb"
+    - "app/controllers/**/*.rb"
+    - "app/services/**/*.rb"
+    - "app/jobs/**/*.rb"
+    - "app/helpers/**/*.rb"
+    - "spec/**/*.rb"
+    - "config/routes.rb"
+  Exclude:
+    - "bin/**/*"
+    - "db/**/*"
+    - "log/**/*"
+    - "tmp/**/*"
+    - "vendor/**/*"
+    - "node_modules/**/*"
+    - "config/**/*"
+    - "lib/**/*"
+    - "Gemfile"
+    - "Rakefile"
+    - "config.ru"
+    - "spec/rails_helper.rb"
+    - "spec/spec_helper.rb"
+
+# ── Style ──────────────────────────────────────────────
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/SymbolArray:
+  EnforcedStyle: brackets
+
+Style/WordArray:
+  Enabled: false
+
+Style/MultilineBlockChain:
+  Enabled: false
+
+# ── Layout ─────────────────────────────────────────────
+Layout/HashAlignment:
+  EnforcedHashRocketStyle: table
+  EnforcedColonStyle: table
+
+Layout/LineLength:
+  Max: 140
+
+# ── Metrics ────────────────────────────────────────────
+Metrics/MethodLength:
+  Max: 15
+
+Metrics/ClassLength:
+  Max: 100
+
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*"
+
+Metrics/AbcSize:
+  Max: 25
+
+# ── Lint ───────────────────────────────────────────────
+Lint/DuplicateSetElement:
+  Enabled: false
+
+# ── Rails ──────────────────────────────────────────────
+Rails/SkipsModelValidations:
+  Enabled: false
+
+Rails/I18nLocaleTexts:
+  Enabled: false
+
+# ── RSpec ──────────────────────────────────────────────
+RSpec/ExampleLength:
+  Max: 12
+
+RSpec/MultipleExpectations:
+  Max: 4
+
+RSpec/NestedGroups:
+  Max: 3
+
+RSpec/AnyInstance:
+  Enabled: false

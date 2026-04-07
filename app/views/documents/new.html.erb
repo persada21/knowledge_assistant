@@ -1,0 +1,35 @@
+<h1 class="text-2xl font-bold text-gray-900 mb-8">Upload Content</h1>
+
+<div class="bg-white rounded-xl border border-gray-200 p-8">
+  <%= form_with model: @document, multipart: true do |f| %>
+    <div class="mb-6">
+      <%= f.label :title, "Document Title", class: "block text-sm font-medium text-gray-700 mb-2" %>
+      <%= f.text_field :title,
+          placeholder: "e.g. Rails Documentation, Company Policy...",
+          class: "w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+      <% @document.errors[:title].each do |error| %>
+        <p class="text-red-500 text-sm mt-1"><%= error %></p>
+      <% end %>
+    </div>
+
+    <div class="mb-6">
+      <%= f.label :original_text, "Paste Your Text", class: "block text-sm font-medium text-gray-700 mb-2" %>
+      <%= f.text_area :original_text,
+          rows: 12,
+          placeholder: "Paste your article, document, notes, or any text here...",
+          class: "w-full border border-gray-300 rounded-lg px-4 py-2 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+      <% @document.errors[:original_text].each do |error| %>
+        <p class="text-red-500 text-sm mt-1"><%= error %></p>
+      <% end %>
+    </div>
+
+    <div class="mb-8">
+      <p class="block text-sm font-medium text-gray-700 mb-2">Or upload a .txt file</p>
+      <%= f.file_field :file, accept: ".txt",
+          class: "text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-blue-50 file:text-blue-600 hover:file:bg-blue-100" %>
+    </div>
+
+    <%= f.submit "Upload and Process",
+        class: "bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 cursor-pointer font-medium" %>
+  <% end %>
+</div>
