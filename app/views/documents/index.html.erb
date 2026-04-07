@@ -1,0 +1,31 @@
+<div class="flex items-center justify-between mb-8">
+  <h1 class="text-2xl font-bold text-gray-900">All Documents</h1>
+  <%= link_to "Upload New", new_document_path,
+      class: "bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 text-sm" %>
+</div>
+
+<% if @documents.any? %>
+  <div class="space-y-4">
+    <% @documents.each do |doc| %>
+      <%= link_to document_path(doc), class: "block bg-white rounded-xl border border-gray-200 p-6 hover:border-blue-300 transition" do %>
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-lg font-semibold text-gray-800"><%= doc.title %></h2>
+            <p class="text-sm text-gray-500 mt-1">
+              <%= doc.ready? ? "#{doc.chunk_count} chunks" : "&mdash;".html_safe %>
+              &middot; uploaded <%= time_ago_in_words(doc.created_at) %> ago
+            </p>
+          </div>
+          <span class="px-3 py-1 rounded-full text-xs font-medium <%= status_badge_class(doc.status) %>">
+            <%= doc.status.capitalize %>
+          </span>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+<% else %>
+  <div class="text-center py-16 text-gray-400">
+    <p class="text-lg mb-4">No documents uploaded yet.</p>
+    <%= link_to "Upload your first document", new_document_path, class: "text-blue-600 underline" %>
+  </div>
+<% end %>

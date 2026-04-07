@@ -1,0 +1,24 @@
+<div class="text-center py-16">
+  <h1 class="text-4xl font-bold text-gray-900 mb-4">Knowledge Assistant</h1>
+  <p class="text-lg text-gray-500 mb-10">
+    Upload any text. Ask questions. Get answers &mdash; with sources.
+  </p>
+
+  <div class="flex justify-center gap-4">
+    <%= link_to "Upload Content", new_document_path,
+        class: "bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700" %>
+    <%= link_to "Ask a Question", new_question_path,
+        class: "bg-white text-blue-600 border border-blue-600 px-6 py-3 rounded-lg hover:bg-blue-50" %>
+  </div>
+
+  <div class="mt-16 grid grid-cols-2 gap-6 text-center max-w-sm mx-auto">
+    <div class="bg-white rounded-xl border border-gray-200 p-6">
+      <p class="text-3xl font-bold text-blue-600"><%= @total_documents %></p>
+      <p class="text-sm text-gray-500 mt-1">Documents</p>
+    </div>
+    <div class="bg-white rounded-xl border border-gray-200 p-6">
+      <p class="text-3xl font-bold text-blue-600"><%= @total_chunks %></p>
+      <p class="text-sm text-gray-500 mt-1">Text chunks indexed</p>
+    </div>
+  </div>
+</div>
