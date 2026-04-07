@@ -1,0 +1,55 @@
+<div class="mb-6">
+  <p class="text-sm text-gray-500">Question</p>
+  <h1 class="text-2xl font-bold text-gray-900">"<%= @answer[:question] %>"</h1>
+</div>
+
+<% if @answer[:confidence] > 0 %>
+  <%# Confidence bar %>
+  <div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+    <div class="flex items-center justify-between mb-2">
+      <p class="text-sm font-medium text-gray-600">Confidence</p>
+      <span class="text-sm font-semibold <%= confidence_text_color(@answer[:confidence]) %>">
+        <%= confidence_label(@answer[:confidence]) %>
+        (<%= (@answer[:confidence] * 100).round(1) %>%)
+      </span>
+    </div>
+    <div class="w-full bg-gray-100 rounded-full h-2">
+      <div class="h-2 rounded-full <%= confidence_bar_color(@answer[:confidence]) %>"
+           style="width: <%= [@answer[:confidence] * 100, 100].min.round %>%">
+      </div>
+    </div>
+  </div>
+
+  <%# Answer text %>
+  <div class="bg-white rounded-xl border border-gray-200 p-8 mb-6">
+    <h2 class="text-sm font-medium text-gray-500 mb-4">Answer</h2>
+    <div class="text-gray-800 leading-relaxed whitespace-pre-line"><%= @answer[:answer] %></div>
+  </div>
+
+  <%# Sources %>
+  <div class="bg-white rounded-xl border border-gray-200 p-6">
+    <h2 class="text-sm font-medium text-gray-500 mb-4">Sources</h2>
+    <div class="space-y-3">
+      <% @answer[:sources].each_with_index do |source, i| %>
+        <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-lg">
+          <span class="text-sm font-bold text-blue-600 mt-0.5">#<%= i + 1 %></span>
+          <div>
+            <p class="font-medium text-gray-800"><%= source[:document_title] %></p>
+            <p class="text-sm text-gray-500">Section <%= source[:section] %> &mdash; score: <%= source[:score] %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+<% else %>
+  <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-8 text-center">
+    <p class="text-yellow-800 font-medium mb-2">No relevant content found</p>
+    <p class="text-yellow-700 text-sm mb-4"><%= @answer[:answer] %></p>
+    <%= link_to "Try another question", new_question_path, class: "text-blue-600 text-sm underline" %>
+  </div>
+<% end %>
+
+<div class="mt-8">
+  <%= link_to "&larr; Ask another question".html_safe, new_question_path, class: "text-blue-600 hover:underline text-sm" %>
+</div>
